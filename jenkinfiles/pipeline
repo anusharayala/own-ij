@@ -11,7 +11,7 @@ pipeline{
       string(name: 'Branch', defaultValue: 'main')
    }
     stages{
-     stage('first'){
+     stage('Build1'){
      when {
         expression { params.Module == 'All' || params.Module == 'Build1' }
      }
@@ -21,7 +21,7 @@ pipeline{
         }
       }
 
-      stage('Second'){
+      stage('Build2'){
            when {
               expression { params.Module == 'All' || params.Module == 'Build2' }
            }
