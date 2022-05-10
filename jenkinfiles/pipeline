@@ -7,25 +7,26 @@ pipeline{
      gradle ('7.4.2')
      }
    parameters{
-      choice(name: 'Module', choices:['All', 'First', 'Second'])
+      choice(name: 'Module', choices:['All', 'Build1', 'Build2'])
       string(name: 'Branch', defaultValue: 'main')
    }
     stages{
      stage('first'){
      when {
-        expression { params.Module == 'All' || params.Module == 'First' }
+        expression { params.Module == 'All' || params.Module == 'Build1' }
      }
       steps{
+        first("john")
         sh 'gradle --version'
         }
       }
 
       stage('Second'){
            when {
-              expression { params.Module == 'All' || params.Module == 'Second' }
+              expression { params.Module == 'All' || params.Module == 'Build2' }
            }
             steps{
-              first("Second Baby")
+              first("marc")
               }
            }
    }
