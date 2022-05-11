@@ -1,0 +1,27 @@
+pipeline{
+  agent any
+  parameters{
+        choice(name: 'Module', choices:['All', 'Build1', 'Build2'])
+        string(name: 'Branch', defaultValue: 'main')
+     }
+      stages{
+       stage('Build1'){
+       when {
+          expression { params.Module == 'All' || params.Module == 'Build1' }
+       }
+        steps{
+          first("john")
+          sh 'gradle --version'
+          }
+        }
+
+        stage('Build2'){
+             when {
+                expression { params.Module == 'All' || params.Module == 'Build2' }
+             }
+              steps{
+                first("marc")
+                }
+             }
+     }
+}
